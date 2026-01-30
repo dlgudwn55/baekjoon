@@ -19,75 +19,49 @@ public class Main {
 	for (int i = 0; i < n; i++) {
 	    line = br.readLine().trim();
 	    for (int j = 0; j < m; j++) {
-		board[i][j] = line.charAt(j);
+		    board[i][j] = line.charAt(j);
 	    }
-	}
+	}	
 
-	char[][] transposedBoard = transposeBoard(board);
-	
-//	for (int i = 0; i < m; i++) {
-//	    transposedBoard[i]
-//	}
 	for (int i = 0; i < m; i++) {
-//	    if (!(transposedBoard[i].toString().contains("#"))) {
-//		transposedBoard[i][0] = transposedBoard[i][0] == '#' ? ''
-//	    }
-//	    System.out.println("Line " + i);
-	    int left = n - 1;
-	    int right = n - 1;
+	    int up = n - 1;
+	    int down = n - 1;
 	    int appleCount = 0;
-//	    boolean isIn = false;
-	    while (left >= 0 && right >= 0) {
-//		br.readLine();
-		if (transposedBoard[i][left] == '#') {
-//		    System.out.println(left + " " + right + " " + appleCount);
-		    for (int j = right; j > left; j--) {
+	    while (up >= 0 && down >= 0) {
+		if (board[up][i] == '#') {
+		    for (int j = down; j > up; j--) {
 			if (appleCount > 0) {
-			    transposedBoard[i][j] = 'o';
+			    board[j][i] = 'o';
 			    appleCount--;
 			} else {
-			    transposedBoard[i][j] = '.';
+			    board[j][i] = '.';
 			}
 		    }
 		    appleCount = 0;
-		    left--;
-		    right = left;
+		    up--;
+		    down = up;
 		} else {
-		    if (transposedBoard[i][left] == 'o') {
+		    if (board[up][i] == 'o') {
 			appleCount++;
 		    }
-		    left--;
+		    up--;
 		}
 	    }
-//	    System.out.println(left + " " + right + " " + appleCount);
-	    for (int j = right; j > left; j--) {
+	    for (int j = down; j > up; j--) {
 		if (appleCount > 0) {
-		    transposedBoard[i][j] = 'o';
+		    board[j][i] = 'o';
 		    appleCount--;
 		} else {
-		    transposedBoard[i][j] = '.';
+		    board[j][i] = '.';
 		}
 	    }
 	}
 	
 	for (int i = 0; i < n; i++) {
 	    for (int j = 0; j < m; j++) {
-		System.out.print(transposedBoard[j][i]);
+		System.out.print(board[i][j]);
 	    }
 	    System.out.println();
 	}
-    }
-
-    // n x m 배열 -> m x n 배열
-    public static char[][] transposeBoard(char[][] board) {
-	int n = board.length;
-	int m = board[0].length;
-	char[][] transposedBoard = new char[m][n];
-	for (int i = 0; i < n; i++) {
-	    for (int j = 0; j < m; j++) {
-		transposedBoard[j][i] = board[i][j];
-	    }
-	}
-	return transposedBoard;
     }
 }
