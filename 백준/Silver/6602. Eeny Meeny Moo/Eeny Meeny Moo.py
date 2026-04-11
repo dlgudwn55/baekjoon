@@ -18,8 +18,8 @@ while True:
                 break
             elif rm == 1 and q:
                 break
-            for _ in range(i):
+            for _ in range(i-1):
                 q.append(q.popleft())
         if flag:
             break
-    print(m + 1)
+    print(m)
